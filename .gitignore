@@ -1,0 +1,58 @@
+# Archivos y carpetas de Unity que se deben ignorar
+
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Ll]ogs/
+[Mm]emoryCaptures/
+UserSettings/
+
+# Ignorar archivos de sistema
+*.DS_Store
+*.swp
+*.lock
+*.tmp
+*.bak
+*.idea
+*.suo
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+
+# Archivos de Visual Studio y MonoDevelop
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.opendb
+*.VC.db
+.vscode/
+
+# Archivos de Paquetes
+Packages/packages-lock.json
+
+# Ignorar archivos de compilación específicos de plataforma
+*.apk
+*.aab
+*.obb
+*.app
+*.exe
+*.ipk
+*.xap
+*.appx
+*.appxbundle
+*.msix
+*.msixbundle
+*.x86
+*.x86_64
+*.bundle
