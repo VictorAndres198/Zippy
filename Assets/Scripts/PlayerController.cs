@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -21,8 +22,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int cherries = 0;
     [SerializeField] private int health = 5;
 
-    [SerializeField] private Text healthTXT;
-    [SerializeField] private Text cherriesTXT;
+    [SerializeField] private TMP_Text healthTXT;
+    [SerializeField] private TMP_Text cherriesTXT;
 
     #region FiniteStateMachine
     private enum State {idle,running,jumping,falling,hurt}
@@ -37,6 +38,7 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
 
         healthTXT.text = health.ToString();
+
     }
 
     void Update()
