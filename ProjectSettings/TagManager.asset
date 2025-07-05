@@ -46,6 +46,9 @@ TagManager:
   - name: Back
     uniqueID: 2393433007
     locked: 0
+  - name: Fondo
+    uniqueID: 3537486733
+    locked: 0
   - name: Enitty
     uniqueID: 999610333
     locked: 0

@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpForce = 10f;
     [SerializeField] private LayerMask ground;
     [SerializeField] private bool isJumping= false;
+    private FoxHurt foxHurt;  // referencia al componente
     #endregion
 
     [SerializeField] private int hurtForce = 10;
@@ -38,7 +39,7 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
 
         healthTXT.text = health.ToString();
-
+        foxHurt = GetComponent<FoxHurt>();
     }
 
     void Update()
@@ -107,6 +108,9 @@ public class PlayerController : MonoBehaviour
             if(Mathf.Abs(rb.velocity.x)<2f) // Antes .1f
             {
                 state=State.idle;
+                // Cuando termina el estado hurt, reseteas el sonido
+                if (foxHurt != null)
+                foxHurt.ResetHurtSound();
             }
         }
         else if (Mathf.Abs(rb.velocity.x)>2f)
@@ -122,10 +126,28 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Collectable")
+       {
+        // 1) Reproduce el sonido en la Cherry
+        var cherryAudio = collision.GetComponent<CherryAudio>();
+        float delay = 0f;
+        if (cherryAudio != null && cherryAudio.successClip != null)
         {
-            Destroy(collision.gameObject);
-            cherries += 1;
-            cherriesTXT.text = cherries.ToString();
+            cherryAudio.playSuccess();
+            delay = cherryAudio.successClip.length;
+        }
+
+        // 2) Oculta y evita más colisiones
+        var col = collision.GetComponent<Collider2D>();
+        if (col != null) col.enabled = false;
+        var sr = collision.GetComponent<SpriteRenderer>();
+        if (sr != null) sr.enabled = false;
+
+        // 3) Actualiza contador UI
+        cherries++;
+        cherriesTXT.text = cherries.ToString();
+
+        // 4) Destruye la Cherry tras esperar el tiempo de audio
+        Destroy(collision.gameObject, delay);
         }
     }
 
